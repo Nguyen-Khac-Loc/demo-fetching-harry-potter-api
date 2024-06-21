@@ -5,12 +5,17 @@
 	font-family: "Amazon Ember", Arial, sans-serif;
 }
 
+:root {
+	--primary-500: #0a99af;
+	--grey-400: #94a3b8;
+	--white: #fff;
+}
 .header h1 {
 	background: -webkit-radial-gradient(#0a99af, #057586);
 	background: radial-gradient(#0a99af, #057586);
 	text-align: center;
 	padding: 2rem 0 2rem 0;
-	text-transform: capitalize;
+	text-transform: uppercase;
 	color: #fff;
 	font-size: 3rem;
 }
@@ -62,7 +67,7 @@ body {
 }
 .book h2 {
 	margin-top: 1rem;
-	font-size: 1rem;
+	font-size: 1.4rem;
 }
 
 .book h4 {
@@ -70,7 +75,51 @@ body {
 	font-size: 0.75rem;
 	margin-top: 0.5rem;
 	letter-spacing: 2px;
-	
 }
 
+/* Loading */
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
 
+.loading {
+	width: 6rem;
+	height: 6rem;
+	border: 5px solid var(--grey-400);
+	border-radius: 50%;
+	margin: 0 auto;
+	border-top-color: var(--primary-500);
+	animation: spinner 0.3s linear infinite;
+}
+.btn,
+.info-btn {
+	border: transparent;
+	cursor: pointer;
+	text-transform: capitalize;
+}
+.info-btn {
+	background: transparent;
+	color: #05aabb;
+	font-weight: 600;
+}
+.btn {
+	border: 1px solid var(--primary-500);
+	color: var(--white);
+	width: 100%;
+	background: #057586;
+	border-radius: 4rem;
+	padding: 0.8rem 1.5rem;
+}
+.btn:hover {
+	background: var(--primary-500);
+	color: var(--white);
+}
+
+.hide-info {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+}
