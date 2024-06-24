@@ -9,8 +9,7 @@ export default function Refresh({ refresh }: Props) {
 			<button
 				type="button"
 				onClick={refresh}
-				className="btn"
-				
+				className="btn"				
 			>
 				Refresh
 			</button>

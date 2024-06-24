@@ -13,21 +13,23 @@ function App() {
 		fetchBook();
 	}, []);
 	async function fetchBook() {
-		const response = await fetch(url);
-		const books = await response.json();
-		setBooks(books);
+		setIsLoading(true);
+		try {
+			const response = await fetch(url);
+			const books = await response.json();
+			setBooks(books);
+		} catch (error) {
+			console.log(error);
+		}
 		setIsLoading(false);
 	}
 	function removeBook(id: string) {
 		const newList = books.filter((book) => book.serial !== id);
 		setBooks(newList);
 	}
-	function refresh() {
-		setIsLoading(true);
-		fetchBook();
-	}
+
 	if (isLoading) return <Loading />;
-	if (books.length === 0) return <Refresh refresh={refresh} />;
+	if (books.length === 0) return <Refresh refresh={fetchBook} />;
 	return (
 		<>
 			<Title title="harry potter books api" />

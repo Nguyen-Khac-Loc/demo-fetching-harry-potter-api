@@ -16,19 +16,17 @@ export default function Book({ book, removeBookFn }: Props) {
 			/>
 			<span className="number">{serial}</span>
 			<h2>{title}</h2>
-			{toggle ? (
-				<h4>{summary}</h4>
-			) : (
-				<h4 className="hide-info">{summary}</h4>
-			)}
+			<h4>
+				{toggle ? summary : `${summary.substring(0, 220)}...`}
+				<button
+					type="button"
+					className="info-btn"
+					onClick={() => setToggle(!toggle)}
+				>
+					{toggle ? "show less" : "read more"}
+				</button>
+			</h4>
 
-			<button
-				type="button"
-				className="info-btn"
-				onClick={() => setToggle(!toggle)}
-			>
-				Read more
-			</button>
 			<button
 				type="button"
 				className="btn"

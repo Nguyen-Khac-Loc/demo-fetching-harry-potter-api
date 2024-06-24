@@ -117,9 +117,21 @@ body {
 	color: var(--white);
 }
 
-.hide-info {
+/* .hide-info {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 4;
 	overflow: hidden;
+} */
+
+.btn-opt {
+	width: 25%;
+	justify-self: center;
+	margin-bottom: 0.5rem;
+	align-self: center;
+}
+
+.btn-container {
+	flex-direction: column;
+	display: flex;
 }
