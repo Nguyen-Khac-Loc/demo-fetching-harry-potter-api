@@ -9,6 +9,8 @@ const url = "https://potterhead-api.vercel.app/api/books";
 function App() {
 	const [books, setBooks] = useState<IBook[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isShowAll, setIsShowAll] = useState(true);
+
 	useEffect(() => {
 		fetchBook();
 	}, []);
@@ -23,6 +25,7 @@ function App() {
 		}
 		setIsLoading(false);
 	}
+	//bug khi xoá phần tử cuối đầu tiên lúc đang hiển thị one by one
 	function removeBook(id: string) {
 		const newList = books.filter((book) => book.serial !== id);
 		setBooks(newList);
@@ -33,9 +36,26 @@ function App() {
 	return (
 		<>
 			<Title title="harry potter books api" />
+			<div className="btn-container">
+				<button
+					type="button"
+					className="btn-opt btn"
+					onClick={() => setIsShowAll(true)}
+				>
+					all
+				</button>
+				<button
+					type="button"
+					className="btn-opt btn"
+					onClick={() => setIsShowAll(false)}
+				>
+					one by one
+				</button>
+			</div>
 			<Booklist
 				books={books}
 				removeBookFn={removeBook}
+				isShowAll={isShowAll}
 			/>
 		</>
 	);

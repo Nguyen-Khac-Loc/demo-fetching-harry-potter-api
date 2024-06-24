@@ -29,7 +29,7 @@ export default function Book({ book, removeBookFn }: Props) {
 
 			<button
 				type="button"
-				className="btn"
+				className="btn btn-border"
 				onClick={() => removeBookFn(serial)}
 			>
 				Not interested
