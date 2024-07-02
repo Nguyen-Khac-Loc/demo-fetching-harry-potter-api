@@ -4,35 +4,15 @@ import { IBook } from "./book.model";
 import Loading from "./core/Loading";
 import Refresh from "./core/Refresh";
 import Title from "./core/Title";
+import useFetch from "./hooks/useFetch";
 
 const url = "https://potterhead-api.vercel.app/api/books";
 function App() {
-	const [books, setBooks] = useState<IBook[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
 	const [isShowAll, setIsShowAll] = useState(true);
-
-	useEffect(() => {
-		fetchBook();
-	}, []);
-	async function fetchBook() {
-		setIsLoading(true);
-		try {
-			const response = await fetch(url);
-			const books = await response.json();
-			setBooks(books);
-		} catch (error) {
-			console.log(error);
-		}
-		setIsLoading(false);
-	}
-	//bug khi xoá phần tử cuối đầu tiên lúc đang hiển thị one by one
-	function removeBook(id: string) {
-		const newList = books.filter((book) => book.serial !== id);
-		setBooks(newList);
-	}
+	const [isLoading, data, fetch, remove] = useFetch<IBook[]>(url);
 
 	if (isLoading) return <Loading />;
-	if (books.length === 0) return <Refresh refresh={fetchBook} />;
+	if (data.length === 0) return <Refresh refresh={fetch} />;
 	return (
 		<>
 			<Title title="harry potter books api" />
@@ -53,8 +33,8 @@ function App() {
 				</button>
 			</div>
 			<Booklist
-				books={books}
-				removeBookFn={removeBook}
+				books={data}
+				removeBookFn={remove}
 				isShowAll={isShowAll}
 			/>
 		</>

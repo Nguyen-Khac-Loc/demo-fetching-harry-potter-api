@@ -4,13 +4,13 @@ import Book from "./Book";
 import { IBook } from "./book.model";
 
 interface Props {
-	books: IBook[];
+	books: IBook[] | undefined;
 	removeBookFn(id: string): void;
 	isShowAll: boolean;
 }
 export default function Booklist({ books, removeBookFn, isShowAll }: Props) {
 	const [index, setIndex] = useState(0);
-	const booksCount = books.length;
+	const booksCount = books!.length;
 	const onNext = () => {
 		setIndex((index + 1) % booksCount);
 	};
@@ -21,7 +21,7 @@ export default function Booklist({ books, removeBookFn, isShowAll }: Props) {
 		<>
 			{isShowAll ? (
 				<section className="booklist">
-					{books.map((book) => {
+					{books!.map((book) => {
 						return (
 							<Book
 								key={book.serial}
@@ -41,8 +41,8 @@ export default function Booklist({ books, removeBookFn, isShowAll }: Props) {
 						<FaChevronLeft />
 					</button>
 					<Book
-						key={books[index].serial}
-						book={books[index]}
+						key={books![index].serial}
+						book={books![index]}
 						removeBookFn={removeBookFn}
 					/>
 					<div className="btn-container "></div>
